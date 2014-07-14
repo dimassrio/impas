@@ -14,7 +14,11 @@
 						<div class="large-6 large-offset-3 columns">
 							<div class="dashboard-course-section">
 								<div class="row">
-									<div class="large-12 columns dashboard-course-image"><img src="{{asset('uploads/course').'/'.$course->id.'/images/'.$course->image}}" alt=""></div>
+									<div class="large-12 columns dashboard-course-image">
+									<a href="{{url('courses').'/'.$course->id}}">
+										<img src="{{asset('uploads/course').'/'.$course->id.'/images/'.$course->image}}" alt="">
+									</a>
+									</div>
 								</div>
 								<div class="row">
 									<div class="large-12 columns dashboard-course-title">

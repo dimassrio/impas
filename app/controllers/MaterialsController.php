@@ -189,7 +189,10 @@ class MaterialsController extends \BaseController {
 
  	public function showCourseMaterial($idc, $order="1"){
  		$this->data['material'] = Material::where('course_id', $idc)->where('order', $order)->get()->first();
+ 		$this->data['prev_material'] = Material::where('course_id', $idc)->where('order', $order-1)->get()->first();
+ 		$this->data['next_material'] = Material::where('course_id', $idc)->where('order', $order+1)->get()->first();
  		$this->data['presentation'] = Presentation::find(1);
  		return View::make('materials.order',$this->data);
  	}
-}
+
+} 

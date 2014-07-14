@@ -3,6 +3,7 @@
 /assets/vendor
 /node_modules
 /public/assets/vendor
+/public/uploads
 composer.phar
 composer.lock
 .env.local.php

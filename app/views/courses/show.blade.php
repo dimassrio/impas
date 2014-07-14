@@ -6,13 +6,16 @@
 		<a href="{{url('courses').'/'.$course->id.'/enroll'}}" class="button expand">ENROLL NOW</a>
 	</div>
 		<div id="course-show-information" class="section">
-			<div class="row">
-				<div class="large-12 columns">
-				<div class="row section">
-					<div class="large-8 columns large-offset-2">
-						<h4>{{$course->description}}</h4>
+			<div id="course-show-description">
+					<div class="row">
+						<div class="large-8 columns large-offset-2">
+							<h4>{{$course->description}}</h4>
+						</div>
 					</div>
 				</div>
+			<div class="row">
+				<div class="large-12 columns">
+				
 				<div class="row section">
 					<div class="large-6 columns">
 						<h3>Course Overview</h3>
@@ -25,9 +28,23 @@
 							</div>
 						@endforeach
 					</div>
-					<div class="large-6 columns">
+					<div class="large-5 columns">
 						<h3>Course Prerequisite</h3>
-						<h3>The Teacher</h3>
+						<div class="row">
+							<div  class="large-12 columns">
+								<h3>The Teacher</h3>
+								<div id="course-show-author" class="row">
+									<div class="large-4 columns">
+										<img src="{{asset('assets/images/user-question.jpg')}}" alt="" class="th">
+									</div>
+									
+									<div  class="large-8 columns">
+										<h4>Administrator</h4>
+									</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

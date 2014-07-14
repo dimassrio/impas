@@ -112,7 +112,14 @@
 					</div>
 				</div>
 				@endif
+				
+				@if($prev_material != NULL)
+				<a href="{{url('courses').'/'.$material->course->id.'/materials/'.$prev_material->id}}" class="button left section">PREVIOUS MATERIAL</a>
+				@endif
 
+				@if($next_material != NULL)
+				<a href="{{url('courses').'/'.$material->course->id.'/materials/'.$next_material->id}}" class="button right section">NEXT MATERIAL</a>
+				@endif
 			</div>
 		</div>
 	</div>
