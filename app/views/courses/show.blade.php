@@ -3,10 +3,15 @@
 @section('body')
 	<div id="courses-show-content" class="min-height">
 	<div id="course-main-image" style="background: {{$course->color}} url('{{asset('uploads/course').'/'.$course->id.'/images/'.$course->image}}') top center no-repeat;" class="text-center">
-		@if(Auth::user()->isCourse($course->id))
-		<a href="{{url('courses').'/'.$course->id.'/materials/1'}}" class="button expand alert">CLICK HERE TO ENJOY OUR MATERIAL</a>
+		
+		@if(sizeof($course->material) != 0)
+			@if(Auth::user()->isCourse($course->id))
+			<a href="{{url('courses').'/'.$course->id.'/materials/1'}}" class="button expand alert">CLICK HERE TO ENJOY OUR MATERIAL</a>
+			@else
+			<a href="{{url('courses').'/'.$course->id.'/enroll'}}" class="button expand">ENROLL NOW</a>
+			@endif
 		@else
-		<a href="{{url('courses').'/'.$course->id.'/enroll'}}" class="button expand">ENROLL NOW</a>
+			<a href="#" class="button expand disabled">THIS COURSE IS UNDER CONSTRUCTION</a>
 		@endif
 	</div>
 		<div id="course-show-information" class="section">
