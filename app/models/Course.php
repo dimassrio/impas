@@ -11,4 +11,8 @@ class Course extends \Eloquent {
 		$courses = Course::all()->toArray();
 		return $courses;
 	}
+
+	public function users(){
+		return $this->belongsToMany('User');
+	}
 }

@@ -25,4 +25,12 @@ class Material extends \Eloquent {
 	public function audio(){
 		return $this->hasMany('Audio');
 	}
+
+	public function exercise(){
+		return $this->hasMany('Exercise');
+	}
+
+	public function users(){
+		return $this->belongsToMany('User');
+	}
 }

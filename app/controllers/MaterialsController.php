@@ -187,6 +187,16 @@ class MaterialsController extends \BaseController {
  		return Redirect::to('materials');
  	}
 
+ 	public function addExercise($id){
+ 		$exercise = new Exercise;
+ 		$exercise->content = Input::get('exercise');
+ 		$exercise->name = Input::get('name');
+ 		$exercise->material_id = $id;
+ 		$exercise->save();
+
+ 		return Redirect::to('materials');
+ 	}
+
  	public function showCourseMaterial($idc, $order="1"){
  		$this->data['material'] = Material::where('course_id', $idc)->where('order', $order)->get()->first();
  		$this->data['prev_material'] = Material::where('course_id', $idc)->where('order', $order-1)->get()->first();

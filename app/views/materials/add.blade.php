@@ -67,6 +67,17 @@
 						</form>
 					</div>
 				</div>
+				<div class="row section">
+					<div class="large-4 large-offset-2 columns">
+						<h5>Add Exercise to this material</h5>
+						<form action="{{url('materials').'/'.$material->id.'/add/exercise'}}"></form>
+						<label for="name">Insert Exercise name</label>
+						<input type="text" name="name" id="name">
+						<label for="exercise">Exercise file to upload.</label>
+						<input type="file" name="exercise" id="exercise">
+						<input type="submit" class="button right small">
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

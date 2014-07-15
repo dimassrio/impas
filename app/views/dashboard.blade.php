@@ -10,8 +10,10 @@
 					</div>
 				</div>
 				@foreach ($courses as $key => $course)
+					@if($key%2 == 0)
 					<div class="row">
-						<div class="large-6 large-offset-3 columns">
+					@endif
+						<div class="large-6 columns">
 							<div class="dashboard-course-section">
 								<div class="row">
 									<div class="large-12 columns dashboard-course-image">
@@ -34,7 +36,9 @@
 								</div>
 							</div>
 						</div>
+					@if($key%2 == 1)
 					</div>
+					@endif
 				@endforeach
 			</div>
 		</div>

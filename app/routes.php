@@ -25,5 +25,7 @@ Route::post('materials/{id}/add/pdf', 'MaterialsController@addPdf');
 Route::post('materials/{id}/add/video', 'MaterialsController@addVideo');
 Route::post('materials/{id}/add/presentation', 'MaterialsController@addPresentation');
 Route::post('materials/{id}/add/video', 'MaterialsController@addAudio');
+Route::post('materials/{id}/add/exercise', 'MaterialsController@addExercise');
 Route::get('courses/{idc}/materials/{order}', 'MaterialsController@showCourseMaterial');
+Route::get('courses/{id}/enroll', 'CoursesController@enroll');
 Route::get('courses/{idc}/materials/{order}/exercise', 'MaterialsController@showCourseMaterialExercise');

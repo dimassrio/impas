@@ -116,6 +116,15 @@ class CoursesController extends \BaseController {
 	}
 
 	public function enroll($id){
-		
+		$user = Auth::user();
+		$courses = Course::find($id);
+		$materials = Material::where('course_id', $id)->get();
+		$user->courses()->attach($courses->id);
+
+		foreach ($materials as $material) {
+			$user->materials()->attach($material->id);
+		}
+
+		return Redirect::to('courses/'.$id.'/materials/1');
 	}
 }
