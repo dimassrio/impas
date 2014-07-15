@@ -88,14 +88,14 @@ class CoursesController extends \BaseController {
 		$course = Course::find($id);
 		$course->name = Input::get('name');
 		$course->description = Input::get('description');
-		$course->color = Input::get('background');
+		
 
 		if(Input::hasFile('image')){
 			$file = Input::file('image');
 			$destination = 'uploads/course/'.$course->id.'/images/';
 			$filename = date('dmy').str_random(12).'.'.$file->getClientOriginalExtension();
 			$upload = $file->move($destination, $filename);
-			
+			$course->color = Input::get('background');
 			if($upload){
 				$course->image = $filename;
 			}
