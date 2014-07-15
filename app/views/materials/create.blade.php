@@ -18,9 +18,7 @@
 							<label for="url">URL for Exercise</label>
 							<input type="file" id="url" name="url">
 							<label for="description">DESCRIPTION</label>
-							<textarea name="description" id="description" cols="30" rows="10">
-								{{$material->description}}
-							</textarea>
+							<textarea name="description" id="description" cols="30" rows="10"></textarea>
 							<label for="course">COURSE</label>
 							<select name="course" id="course">
 								{{System::arrayToOption(Course::getArray())}}

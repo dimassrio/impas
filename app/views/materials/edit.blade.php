@@ -11,9 +11,7 @@
 							<label for="name">NAME</label>
 							<input type="text" id="name" name="name" placeholder="{{$material->name}}">
 							<label for="description">DESCRIPTION</label>
-							<textarea name="description" id="description" cols="30" rows="10">
-								{{$material->description}}
-							</textarea>
+							<textarea name="description" id="description" cols="30" rows="10">{{$material->description}}</textarea>
 							<label for="course">COURSE</label>
 							<select name="course" id="course">
 								{{System::arrayToOption(Course::getArray())}}
