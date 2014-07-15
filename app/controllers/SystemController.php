@@ -92,4 +92,9 @@ class SystemController extends \BaseController {
 	public function about(){
 		return View::make('about');
 	}
+
+	public function report(){
+		$this->data['histories'] = History::where('user_id', Auth::user()->id)->orderBy('material_id')->get();
+		return View::make('reports', $this->data);
+	}
 }

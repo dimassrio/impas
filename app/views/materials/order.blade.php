@@ -2,16 +2,22 @@
 
 @section('body')
 	<div id="materials-create-content" class="min-height">
+	<div id="course-main-image" style="background: {{$material->course->color}} url('{{asset('uploads/course').'/'.$material->course->id.'/images/'.$material->course->image}}') top center no-repeat;" class="text-center">
+	</div>
 		<div class="row row-white section">
 			<div class="large-12 columns">
 				<ul class="breadcrumbs">
 					<li><a href="{{url('courses').'/'.$material->course->id}}">{{$material->course->name}}</a></li>
 					<li class="current"><a href="#">{{$material->name}}</a></li>
 				</ul>
-
-				@if(Auth::check() && Auth::user()->isAdmin())
+				<div class="row section">
+						<div class="large-6 large-offset-3  text-center columns">
+							<h3>{{$material->name}}</h3>
+						</div>
+					</div>
+				<!-- @if(Auth::check() && Auth::user()->isAdmin())
 					<a href="{{url('materials').'/'.$material->id.'/add'}}" class="button small">EDIT MATERIAL</a>
-				@endif
+				@endif -->
 				
 				@if($material->type == 'content')
 					@if($material->presentation->count() > 0)

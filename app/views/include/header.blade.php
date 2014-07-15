@@ -30,6 +30,9 @@
 			<li>
 				<a href="{{url('references')}}">REFERENCES</a>
 			</li>
+			@if(Auth::check())
+				<li><a href="{{url('reports')}}">REPORT</a></li>
+			@endif
 		</ul>
 	</section>
 	</nav>

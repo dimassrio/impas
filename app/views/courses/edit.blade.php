@@ -6,7 +6,8 @@
 			<div class="large-12 columns">
 				<div class="row section">
 					<div class="large-6 columns large-offset-3">
-						{{Form::open(array('url' => url('courses').'/'.$course->id, 'method' => 'put', 'files'=>'true'))}}
+						<!-- {{Form::open(array('url' => url('courses').'/'.$course->id.'/edit', 'method' => 'POST', 'files'=>'true'))}} -->
+						<form action="{{url('courses').'/'.$course->id.'/edit'}}" method="POST" enctype="multipart/form-data">
 						<h4>UPDATE COURSE {{$course->name}} </h4>
 							<label for="name">COURSE NAME</label>
 							<input type="text" id="name" name="name" placeholder="{{$course->name}}">
