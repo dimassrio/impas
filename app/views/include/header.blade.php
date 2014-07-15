@@ -26,9 +26,9 @@
 
 		<!-- Left Nav Section -->
 		<ul class="left">
-			<li><a href="#">ABOUT US</a></li>
+			<li><a href="{{url('about')}}">ABOUT US</a></li>
 			<li>
-				<a href="#">REFERENCES</a>
+				<a href="{{url('references')}}">REFERENCES</a>
 			</li>
 		</ul>
 	</section>

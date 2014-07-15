@@ -38,10 +38,21 @@ class MaterialsController extends \BaseController {
 	{
 		$material = new Material;
 		$material->name = Input::get('name');
+		$material->type = Input::get('type');
 		$material->description = Input::get('description');
+		if($material->type == 'exercise'){
+			$file = Input::file('url');
+			$filename = date('dmy').str_random(12).'.'.$file->getClientOriginalExtension();
+			$destination = 'uploads/course/'.Input::get('course').'/exercise/';
+			$upload = $file->move($destination, $filename);
+			if($upload){
+				$material->url = $filename;
+			}
+		}
 		$material->course_id = Input::get('course');
 		$order = Material::where('course_id', Input::get('course'))->orderBy('order','asc')->get()->last()->order;
-		$material->order = $order++;
+		
+		$material->order = $order+1;
 		$material->save();
 
 		return Redirect::to('materials');
@@ -202,7 +213,38 @@ class MaterialsController extends \BaseController {
  		$this->data['prev_material'] = Material::where('course_id', $idc)->where('order', $order-1)->get()->first();
  		$this->data['next_material'] = Material::where('course_id', $idc)->where('order', $order+1)->get()->first();
  		$this->data['presentation'] = Presentation::find(1);
+
  		return View::make('materials.order',$this->data);
+ 	}
+
+ 	public function showCourseMaterialAnswers($idc, $order){
+ 		$json = Session::pull('exercise');
+ 		$count = sizeof($json->content);
+ 		$result = 0;
+ 		$content = $json->content;
+ 		for ($i=0; $i < $count; $i++) { 
+ 			$quest = $content[$i];
+ 			if(Input::get('question_'.$i) == $quest->true){
+ 				$result++;
+ 			}
+ 		}
+
+ 		$history = new History;
+ 		$history->type = "exercise";
+ 		$history->material_id = Material::where('course_id', $idc)->where('order', $order)->get()->first()->id;
+ 		$history->user_id = Auth::user()->id;
+ 		$history->value = $result;
+
+ 		$history->save();
+
+ 		$next_material = Material::where('course_id', $idc)->where('order', $order+1)->get()->first();
+ 		if ($next_material != NULL) {
+ 			return Redirect::to('courses/'.$idc.'/materials/'.$next_material->order);
+ 		}else{
+ 			return Redirect::to('courses/'.$idc);
+ 		}
+
+
  	}
 
 } 

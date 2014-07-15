@@ -63,9 +63,26 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 	    return 'remember_token';
 	}
-
+	public function isAdmin(){
+		if($this->level == 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	public function courses(){
 		return $this->belongsToMany('Course');
+	}
+
+	public function isCourse($id){
+		$trigger = false;
+		
+		foreach ($this->courses as $c) {
+			if($c->id == $id){
+				$trigger = true;
+			}
+		}
+		return $trigger;
 	}
 
 	public function materials(){

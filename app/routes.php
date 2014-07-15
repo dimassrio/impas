@@ -11,21 +11,23 @@
 |
 */
 
-Route::get('/', 'SystemController@index');
-Route::post('login', 'UsersController@login');
-Route::get('logout', 'UsersController@logout');
+Route::get('/', 'SystemController@index')->before('dashboard');
+Route::post('login', 'UsersController@login')->before('guest');;
+Route::get('logout', 'UsersController@logout')->before('auth');;
 Route::get('dashboard', 'SystemController@dashboard');
 Route::get('courses/{id}/enroll', 'CoursesController@enroll');
 Route::resource('users', 'UsersController');
 Route::resource('courses', 'CoursesController');
 Route::resource('materials', 'MaterialsController');
+Route::get('references', 'SystemController@references');
+Route::get('about', 'SystemController@about');
 Route::get('materials/{id}/add', 'MaterialsController@add');
 Route::post('materials/{id}/add/content', 'MaterialsController@addContent');
 Route::post('materials/{id}/add/pdf', 'MaterialsController@addPdf');
 Route::post('materials/{id}/add/video', 'MaterialsController@addVideo');
 Route::post('materials/{id}/add/presentation', 'MaterialsController@addPresentation');
-Route::post('materials/{id}/add/video', 'MaterialsController@addVideo');
+Route::post('materials/{id}/add/audio', 'MaterialsController@addAudio');
 Route::post('materials/{id}/add/exercise', 'MaterialsController@addExercise');
 Route::get('courses/{idc}/materials/{order}', 'MaterialsController@showCourseMaterial');
 Route::get('courses/{id}/enroll', 'CoursesController@enroll');
-Route::get('courses/{idc}/materials/{order}/exercise', 'MaterialsController@showCourseMaterialExercise');
+Route::post('courses/{idc}/materials/{order}/answers', 'MaterialsController@showCourseMaterialAnswers');

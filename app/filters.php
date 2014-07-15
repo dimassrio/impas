@@ -44,6 +44,10 @@ Route::filter('auth.basic', function()
 	return Auth::basic();
 });
 
+Route::filter('dashboard', function(){
+	if(Auth::check()) return Redirect::to('dashboard');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Guest Filter

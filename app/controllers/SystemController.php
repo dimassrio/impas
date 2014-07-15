@@ -84,4 +84,12 @@ class SystemController extends \BaseController {
 		$this->data['courses'] = Course::all();
 		return View::make('dashboard', $this->data);
 	}
+
+	public function references(){
+		return View::make('references');
+	}
+
+	public function about(){
+		return View::make('about');
+	}
 }

@@ -20,7 +20,7 @@
 								@foreach ($materials as $material) 
 									<tr>
 										<td class="integer">{{$no++}}</td>
-										<td>{{$material->name}}</td>
+										<td><a href="{{url('courses').'/'.$material->course->id.'/materials/'.$material->order}}">{{$material->name}}</a></td>
 										<td>{{$material->description}}</td>
 										<td>{{$material->course->name}}</td>
 										<td><a href="{{url('materials').'/'.$material->id.'/add'}}" class="button tiny">ADD CONTENT</a>

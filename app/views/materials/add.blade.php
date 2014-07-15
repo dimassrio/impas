@@ -34,7 +34,6 @@
 					</div>
 					<div class="large-4 columns left">
 						<h5>Add audio to this material.</h5>
-
 						<form action="{{url('materials').'/'.$material->id.'/add/audio'}}" method="post" enctype="multipart/form-data">
 						<label for="name">Insert audio name</label>
 						<input type="text" id="name" name="name">
