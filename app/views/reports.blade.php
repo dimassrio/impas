@@ -12,8 +12,9 @@
 				</div>
 				<div class="row">
 					<div class="large-6 columns">
-					@if($histories == NULL)
-						<h5>No activity has been reported.</h5>
+					
+					@if(sizeof($histories) == 0)
+						<h5>No activity has been tracked.</h5>
 					@else
 						<h5>This is your reports on Impas.</h5>
 						<table width="100%">

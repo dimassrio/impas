@@ -1,23 +1,21 @@
 <?php
 
-class SystemController extends \BaseController {
-
-	public function __construct(){
-		parent::__construct();
-	}
+class TagsController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
+	 * GET /tags
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		return View::make('index');
+		//
 	}
 
 	/**
 	 * Show the form for creating a new resource.
+	 * GET /tags/create
 	 *
 	 * @return Response
 	 */
@@ -28,6 +26,7 @@ class SystemController extends \BaseController {
 
 	/**
 	 * Store a newly created resource in storage.
+	 * POST /tags
 	 *
 	 * @return Response
 	 */
@@ -38,6 +37,7 @@ class SystemController extends \BaseController {
 
 	/**
 	 * Display the specified resource.
+	 * GET /tags/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -49,6 +49,7 @@ class SystemController extends \BaseController {
 
 	/**
 	 * Show the form for editing the specified resource.
+	 * GET /tags/{id}/edit
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -60,6 +61,7 @@ class SystemController extends \BaseController {
 
 	/**
 	 * Update the specified resource in storage.
+	 * PUT /tags/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -71,6 +73,7 @@ class SystemController extends \BaseController {
 
 	/**
 	 * Remove the specified resource from storage.
+	 * DELETE /tags/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -80,23 +83,4 @@ class SystemController extends \BaseController {
 		//
 	}
 
-	public function dashboard(){
-		$this->data['courses'] = Course::all();
-		$this->data['tags'] = Tag::all();
-		return View::make('dashboard', $this->data);
-	}
-
-	public function references(){
-		return View::make('references');
-	}
-
-	public function about(){
-		return View::make('about');
-	}
-
-	public function report(){
-
-		$this->data['histories'] = History::where('user_id', Auth::user()->id)->orderBy('material_id')->get();
-		return View::make('reports', $this->data);
-	}
 }

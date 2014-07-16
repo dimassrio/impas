@@ -6,7 +6,7 @@
 		
 		@if(sizeof($course->material) != 0)
 			@if(Auth::user()->isCourse($course->id))
-			<a href="{{url('courses').'/'.$course->id.'/materials/1'}}" class="button expand alert">CLICK HERE TO ENJOY OUR MATERIAL</a>
+			<a href="{{url('courses').'/'.$course->id.'/materials/1'}}" class="button expand alert">CLICK HERE TO ENJOY OUR LESSON</a>
 			@else
 			<a href="{{url('courses').'/'.$course->id.'/enroll'}}" class="button expand">ENROLL NOW</a>
 			@endif
