@@ -50,8 +50,15 @@ class MaterialsController extends \BaseController {
 			}
 		}
 		$material->course_id = Input::get('course');
-		$order = Material::where('course_id', Input::get('course'))->orderBy('order','asc')->get()->last()->order;
-		
+
+		$order = Material::where('course_id', Input::get('course'))->orderBy('order','asc')->get()->last();
+		if($order != NULL){
+			$order = $order->order;
+		}
+		else{
+			$order = 0;
+		}
+
 		$material->order = $order+1;
 		$material->save();
 
