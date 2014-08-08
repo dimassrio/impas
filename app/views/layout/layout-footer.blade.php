@@ -7,7 +7,7 @@
 		<script type="text/javascript" src="{{asset('assets/vendor/jquery-placeholder/jquery.placeholder.js')}}"></script>
 		<script type="text/javascript" src="{{asset('assets/vendor/jquery.cookie/jquery.cookie.js')}}"></script>
 		<script type="text/javascript" src="{{asset('assets/vendor/Lodash/dist/Lodash.min.js')}}"></script>-->
-		<script type="text/javascript" src="{{asset('assets/vendor/foundation/js/foundation.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('assets/vendor/foundation/dist/assets/js/foundation.min.js')}}"></script>
 		<script>$(document).foundation();</script>
 		<!-- Put New Javascript under @section('js') -->
 		@yield('js')

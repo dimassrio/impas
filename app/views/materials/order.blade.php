@@ -131,13 +131,13 @@
 				@endif
 				
 				@if($prev_material != NULL)
-				<a href="{{url('courses').'/'.$material->course->id.'/materials/'.$prev_material->order}}" class="button left section">PREVIOUS MATERIAL</a>
+				<a href="{{url('courses').'/'.$material->course->id.'/materials/'.$prev_material->order}}" class="button left section">PREVIOUS LESSON</a>
 				@elseif($prev_material != NULL)
 				<a href="{{url('dashboard')}}" class="button alert section">BACK TO DASHBOARD</a>
 				@endif
 
 				@if($next_material != NULL)
-				<a href="{{url('courses').'/'.$material->course->id.'/materials/'.$next_material->order}}" class="button right section">NEXT MATERIAL</a>
+				<a href="{{url('courses').'/'.$material->course->id.'/materials/'.$next_material->order}}" class="button right section">NEXT LESSON</a>
 				@else
 				<a href="{{url('dashboard')}}" class="button alert right section">BACK TO DASHBOARD</a>
 				@endif

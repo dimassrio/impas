@@ -17,6 +17,6 @@ class Course extends \Eloquent {
 	}
 
 	public function tags(){
-		return $this->belongsToMany('User');
+		return $this->belongsToMany('Tag');
 	}
 }

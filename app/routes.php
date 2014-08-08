@@ -24,6 +24,8 @@ Route::resource('materials', 'MaterialsController');
 Route::get('references', 'SystemController@references');
 Route::get('about', 'SystemController@about');
 Route::get('materials/{id}/add', 'MaterialsController@add');
+Route::get('materials/{id}/addbulks', 'MaterialsController@addBulk');
+Route::post('materials/{id}/addbulks', 'MaterialsController@addBulks');
 Route::post('materials/{id}/add/content', 'MaterialsController@addContent');
 Route::post('materials/{id}/add/pdf', 'MaterialsController@addPdf');
 Route::post('materials/{id}/add/video', 'MaterialsController@addVideo');

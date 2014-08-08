@@ -138,12 +138,79 @@ class MaterialsController extends \BaseController {
 		return View::make('materials.add', $this->data);
  	}
 
- 	public function addContent($id){
+ 	public function addBulk($id){
+		$this->data['material'] = Material::find($id);
+		return View::make('materials.bulks', $this->data);
+ 	}
+
+ 	public function addBulks($id){
  		$content = new Content;
  		$content->content = Input::get("content");
  		$content->material_id = $id;
  		$content->save();
 
+
+ 	}
+
+ 	public function addContent($id){
+ 		if(Input::has('content')){
+ 			$content = new Content;
+	 		$content->content = Input::get("content");
+	 		$content->material_id = $id;
+	 		$content->save();
+ 		}
+
+ 		if(Input::hasFile('pdf')){
+ 			$file = Input::file('pdf');
+	 		if($file->getMimeType() == "application/pdf"){
+	 			$pdfile = new Pdfile;
+	 			$pdfile->name = Input::get('pdf_name');
+	 			$material = Material::find($id);
+				$destination = 'uploads/course/'.$material->course_id.'/pdf/';
+				$filename = date('dmy').str_random(12).'.'.$file->getClientOriginalExtension();
+				$upload = $file->move($destination, $filename);
+				if($upload){
+					$pdfile->pdfile = $filename;
+				}
+	 			$pdfile->material_id = $id;
+	 			$pdfile->save();
+	 		}
+ 		}
+
+ 		if(Input::hasFile('audio')){
+ 			$file = Input::file('audio');
+	 		if($file->getMimeType() == "audio/mpeg"){
+	 			$audio = new Audio;
+	 			$audio->name = Input::get('audio_name');
+	 			$material = Material::find($id);
+				$destination = 'uploads/course/'.$material->course_id.'/audio/';
+				$filename = date('dmy').str_random(12).'.'.$file->getClientOriginalExtension();
+				$upload = $file->move($destination, $filename);
+				if($upload){
+					$audio->audio = $filename;
+				}
+	 			$audio->material_id = $id;
+	 			$audio->save();
+	 		}
+ 		}
+
+ 		if(Input::has('video')){
+ 			$video = new Video;
+	 		$video->video = Input::get('video_name');
+	 		$video->type = "youtube";
+	 		$video->name = Input::get('name');
+	 		$video->material_id = $id;
+	 		$video->save();
+ 		}
+
+ 		if(Input::has('presentation')){
+ 			$presentation = new Presentation;
+	 		$presentation->presentation = Input::get('presentation_name');
+	 		$presentation->type = "onedrive";
+	 		$presentation->name = Input::get('name');
+	 		$presentation->material_id = $id;
+	 		$presentation->save();
+ 		}
  		return Redirect::to('materials');
  	}
 
