@@ -144,15 +144,6 @@ class MaterialsController extends \BaseController {
  	}
 
  	public function addBulks($id){
- 		$content = new Content;
- 		$content->content = Input::get("content");
- 		$content->material_id = $id;
- 		$content->save();
-
-
- 	}
-
- 	public function addContent($id){
  		if(Input::has('content')){
  			$content = new Content;
 	 		$content->content = Input::get("content");
@@ -212,6 +203,14 @@ class MaterialsController extends \BaseController {
 	 		$presentation->save();
  		}
  		return Redirect::to('materials');
+ 	}
+
+ 	public function addContent($id){ 		
+ 		$content = new Content;
+ 		$content->content = Input::get("content");
+ 		$content->material_id = $id;
+ 		$content->save();
+ 		 return Redirect::to('materials');
  	}
 
  	public function addPdf($id){
