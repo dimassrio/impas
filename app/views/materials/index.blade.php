@@ -24,6 +24,7 @@
 										<td>{{$material->description}}</td>
 										<td>{{$material->course->name}}</td>
 										<td><a href="{{url('materials').'/'.$material->id.'/add'}}" class="button tiny">ADD CONTENT</a>
+										<a href="{{url('materials').'/'.$material->id.'/addbulks'}}" class="button tiny">BULK</a>
 											<a href="{{url('materials').'/'.$material->id.'/edit'}}" class="button tiny">EDIT</a>
 											{{link_to(url('materials').'/'.$material->id, "Delete", $attributes = array('class'=>'button alert tiny'));}}
 										</td>
