@@ -187,9 +187,9 @@ class MaterialsController extends \BaseController {
 
  		if(Input::has('video')){
  			$video = new Video;
-	 		$video->video = Input::get('video_name');
+	 		$video->video = Input::get('video');
 	 		$video->type = "youtube";
-	 		$video->name = Input::get('name');
+	 		$video->name = Input::get('video_name');
 	 		$video->material_id = $id;
 	 		$video->save();
  		}
