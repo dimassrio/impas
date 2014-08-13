@@ -48,11 +48,12 @@ class Material extends \Eloquent {
 			Session::put('exercise', $json);
 			//$string .= "<input type=\"hidden\" value='".json_encode($json)."' name=\"json\">";
 			$string .= "<ol class=\"question\" >";
-			foreach ($json->content as $key => $c) {
+			for($key=0; $key<sizeof($json->content); $key++){
+				$c = $json->content[$key];
 				$num = $key+1;
 				$string .= "<li><p>".$c->question." </p>";
 				foreach ($c->answer as $k =>$a) {
-					$string .="<input type=\"radio\" id=\"question_".$key."_answer_".$k."\" name=\"question_".$key."\" value=\"".$a->key."\" /><label for=\"question_".$key."_answer_".$k."\">".$a->text."</label><br />";
+					$string .="<input type=\"radio\" id=\"question_".$key."_answer_".$k."\" name=\"question_".$key."\" value=\"".$k."\" /><label for=\"question_".$key."_answer_".$k."\">".$a->text."</label><br />";
 				}
 				$string .= "</li>";
 			}

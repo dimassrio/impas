@@ -13,7 +13,7 @@ class MaterialsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$this->data['materials'] = Material::all();
+		$this->data['materials'] = Material::orderBy('course_id')->orderBy('order')->get();
 		return View::make('materials.index', $this->data);
 	}
 
@@ -130,7 +130,19 @@ class MaterialsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$material = Material::find($id);
+		$course = $material->course_id;
+		$material->delete();
+
+		$materials = Material::where('course_id', $course)->orderBy('order')->get();
+		$count = 1;
+		foreach ($materials as $m) {
+			$m->order = $count;
+			$m->save();
+			$count++;
+		}
+
+		return Redirect::to('materials');
 	}
 
 	public function add($id){

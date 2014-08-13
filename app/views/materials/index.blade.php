@@ -26,7 +26,9 @@
 										<td><a href="{{url('materials').'/'.$material->id.'/add'}}" class="button tiny">ADD CONTENT</a>
 										<a href="{{url('materials').'/'.$material->id.'/addbulks'}}" class="button tiny">BULK</a>
 											<a href="{{url('materials').'/'.$material->id.'/edit'}}" class="button tiny">EDIT</a>
-											{{link_to(url('materials').'/'.$material->id, "Delete", $attributes = array('class'=>'button alert tiny'));}}
+											{{ Form::open(array('url' => url('materials').'/'.$material->id, 'method'=>'DELETE')) }}
+											{{Form::submit('Delete', array('class'=>'button alert tiny'))}}
+											{{ Form::close() }}
 										</td>
 									</tr>
 								@endforeach
