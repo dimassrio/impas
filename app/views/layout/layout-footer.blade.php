@@ -1,8 +1,8 @@
 		<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script> -->
 		<script type="text/javascript" src="{{asset('assets/vendor/jquery/dist/jquery.min.js')}}"></script>
-		<!--<script type="text/javascript" src="{{asset('assets/vendor/jquery-ui/ui/jquery-ui.js')}}"></script>
-		<script type="text/javascript" src="{{asset('assets/vendor/underscore/underscore.js')}}"></script>
+		<script type="text/javascript" src="{{asset('assets/vendor/jquery-ui/jquery-ui.js')}}"></script>
+		<!--<script type="text/javascript" src="{{asset('assets/vendor/underscore/underscore.js')}}"></script>
 		<script type="text/javascript" src="{{asset('assets/vendor/fastclick/lib/fastclick.js')}}"></script>
 		<script type="text/javascript" src="{{asset('assets/vendor/jquery-placeholder/jquery.placeholder.js')}}"></script>
 		<script type="text/javascript" src="{{asset('assets/vendor/jquery.cookie/jquery.cookie.js')}}"></script>

@@ -18,7 +18,7 @@
 		<!-- Right Nav Section -->
 		<ul class="right">
 			@if(Auth::check())
-				<li><a href="{{url('logout')}}" class="alert button">LOGOUT {{Auth::user()->name}}</a></li>
+				<li><a href="{{url('logout')}}" class="alert button">Logout</a></li>
 			@else
 			<li><a href="{{url('users/create')}}" class="button">SIGN UP</a></li>
 			@endif

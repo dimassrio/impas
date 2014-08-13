@@ -292,14 +292,28 @@ class MaterialsController extends \BaseController {
 
  	public function showCourseMaterialAnswers($idc, $order){
  		$json = Session::pull('exercise');
- 		$count = sizeof($json->content);
  		$result = 0;
- 		$content = $json->content;
- 		for ($i=0; $i < $count; $i++) { 
- 			$quest = $content[$i];
- 			if(Input::get('question_'.$i) == $quest->true){
- 				$result++;
+ 		if($json->content[0]->type == "multiplechoice"){
+ 			$count = sizeof($json->content);
+	 		$content = $json->content;
+	 		for ($i=0; $i < $count; $i++) { 
+	 			$quest = $content[$i];
+	 			if(Input::get('question_'.$i) == $quest->correct){
+	 				$result++;
+	 			}
+	 		}
+ 		}else if($json->content[0]->type == "dragdrop"){
+ 			$count = sizeof($json->content);
+ 			for($i=0; $i<$count; $i++){
+ 				$answer = $content[$i]->correct;
+ 				$ans = Input::get('question_'.$i);
+ 				foreach ($ans as $k => $a) {
+ 					if($a == $answer[$k]){
+ 						$result++;
+ 					}
+ 				}
  			}
+ 			
  		}
 
  		$history = new History;

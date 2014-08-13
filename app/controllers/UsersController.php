@@ -13,11 +13,13 @@ class UsersController extends \BaseController {
 	 */
 	public function index()
 	{
-		if(Auth::user()->level>0){
+		if(Auth::check()){
+			if(Auth::user()->level>0){
 			return Redirect::intended('dashboard');
 		}else{
 			$this->data['users'] = User::all();
 			return View::make('users.index', $this->data);
+		}
 		}
 	}
 
@@ -112,7 +114,7 @@ class UsersController extends \BaseController {
 		if (Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password')))){
 		    return Redirect::intended('dashboard');
 		}else{
-			return Redirect::intended('/');
+			return Redirect::intended('/')->with('messages', 'Sorry, we can\'t found your account. Perhaps you put the wrong username or mispelling something?');
 		}
 	}
 

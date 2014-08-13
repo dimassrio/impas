@@ -7,11 +7,17 @@ body{
 	min-height:700px;
 }
 #footer{
-	padding-top:20px;
 	background:#34352D;
 	color : #FFFFFF;
 	h1,h2,h3,h4,h5,h6,p{
 		color:#FFFFFF;
+	}
+	.footer-top{
+		padding:20px 0;
+		background-color:#CD6F56;
+	}
+	.footer-bottom{
+		padding-top:50px;
 	}
 }
 

@@ -12,9 +12,10 @@
 */
 
 Route::get('/', 'SystemController@index')->before('dashboard');
-Route::post('login', 'UsersController@login')->before('guest');;
-Route::get('logout', 'UsersController@logout')->before('auth');;
-Route::get('dashboard', 'SystemController@dashboard');
+Route::post('login', 'UsersController@login')->before('guest');
+
+Route::get('logout', 'UsersController@logout');
+Route::get('dashboard', 'SystemController@dashboard')->before('auth');
 Route::get('courses/{id}/enroll', 'CoursesController@enroll');
 Route::resource('users', 'UsersController');
 Route::post('courses/{id}/edit', 'CoursesController@update');
@@ -35,5 +36,5 @@ Route::post('materials/{id}/add/exercise', 'MaterialsController@addExercise');
 Route::get('courses/{idc}/materials/{order}', 'MaterialsController@showCourseMaterial');
 Route::get('courses/{id}/enroll', 'CoursesController@enroll');
 Route::post('courses/{idc}/materials/{order}/answers', 'MaterialsController@showCourseMaterialAnswers');
-
+Route::post('courses/{idc}/order', 'CoursesController@orderMaterial');
 Route::get('reports', 'SystemController@report');

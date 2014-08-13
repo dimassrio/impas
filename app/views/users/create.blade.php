@@ -21,10 +21,10 @@
 									<label for="email" class="right inline">Email :</label>
 								</div>
 								<div class="large-9 columns">
-									<input type="text" id="username" id="username">
-									<input type="password" id="password">
-									<input type="text" id="name">
-									<input type="text" id="email">
+									<input type="text" id="username" name="username">
+									<input type="password" id="password" name="password">
+									<input type="text" id="name" name="name">
+									<input type="text" id="email" name="email">
 									<input type="submit" class="button right small">
 								</div>
 							</div>

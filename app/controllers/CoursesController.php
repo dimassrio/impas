@@ -73,6 +73,7 @@ class CoursesController extends \BaseController {
 	public function edit($id)
 	{
 		$this->data['course'] = Course::find($id);
+		$this->data['materials'] = Material::where('course_id', $id)->orderBy('order')->get();
 		return View::make('courses.edit', $this->data);
 	}
 
@@ -128,5 +129,19 @@ class CoursesController extends \BaseController {
 		}
 
 		return Redirect::to('courses/'.$id.'/materials/1');
+	}
+
+	public function orderMaterial($id){
+		$data = json_decode(Input::get('list'));
+		$count = 1;
+		foreach($data as $d){
+			$material = Material::find($d);
+			$material->order = $count;
+			$material->save();
+			$count++;
+		}
+
+		return Response::json(['success' => true]);
+
 	}
 }

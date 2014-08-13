@@ -131,15 +131,15 @@
 				@endif
 				
 				@if($prev_material != NULL)
-				<a href="{{url('courses').'/'.$material->course->id.'/materials/'.$prev_material->order}}" class="button left section">PREVIOUS LESSON</a>
+				<a href="{{url('courses').'/'.$material->course->id.'/materials/'.$prev_material->order}}" class="button left section" id="material-previous-button">PREVIOUS LESSON</a>
 				@elseif($prev_material != NULL)
-				<a href="{{url('dashboard')}}" class="button alert section">BACK TO DASHBOARD</a>
+				<a href="{{url('dashboard')}}" class="button alert section" id="material-previous-button">BACK TO DASHBOARD</a>
 				@endif
 
 				@if($next_material != NULL)
-				<a href="{{url('courses').'/'.$material->course->id.'/materials/'.$next_material->order}}" class="button right section">NEXT LESSON</a>
+				<a href="{{url('courses').'/'.$material->course->id.'/materials/'.$next_material->order}}" class="button right section" id="material-next-button">NEXT LESSON</a>
 				@else
-				<a href="{{url('dashboard')}}" class="button alert right section">BACK TO DASHBOARD</a>
+				<a href="{{url('dashboard')}}" class="button alert right section" id="material-next-button">BACK TO DASHBOARD</a>
 				@endif
 			</div>
 		</div>
@@ -154,4 +154,25 @@
     var as = audiojs.createAll();
   });
 </script>
+
+@if($material->type == 'exercise')
+	<script type="text/javascript">
+	$(function(){
+		$('#material-next-button').hide();
+		$('#material-previous-button').hide();
+		/*$('#exercise-submit-button').click(normalAll);
+		function normalAll(){
+			$('#material-next-button').show();
+			$('#material-previous-button').show();			
+		}*/
+	});
+	</script>
+@else
+<script type="text/javascript">
+	$(function(){
+		$('#material-next-button').show();
+		$('#material-previous-button').show();
+	});
+	</script>
+@endif
 @stop
