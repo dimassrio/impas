@@ -98,6 +98,36 @@ class Material extends \Eloquent {
 			$string .= "</div>";
 			$string .= "</form>";
 			$string .= "</div>";
+		}else if($json->content[0]->type == "imagerecord"){
+			Session::flash('type', 'imagerecord');
+			$path = asset("uploads/course/".$this->course_id."/".$this->id."/images/");
+			$string = "<div class=\"row\">";
+			$string .= "<div class=\"large-4 large-offset-3 columns\">";
+			$string .= "<h4>".$json->subtitle."</h4>";
+			$string .= "<ul class=\"exercise-orbit\" data-orbit   data-options=\"animation:fade;animation_speed:500;slide_number:false; bullets:false;circular:false;\" style=\"width:400;\">";
+			foreach ($json->content as $k => $c) {
+				$string .= "<li id=\"image_".$k."\" style=\"text-align:center;\">";
+				$string .= "<img src=\"".$path.'/'.$c->image."\" alt=\"".$c->image."\" />";
+				$string .= "</li>";
+			}
+			$string .= "</ul>";
+			$string .= "</div>";
+			$string .= "</div>";
+			$string .= "<div class=\"row\">";
+			$string .= "<div class=\"large-3 large-offset-3 columns\">";
+			$string .= "<button id=\"exercise-start\" class=\"button small\">START</button>";
+			$string .= "&nbsp;";
+			$string .= "</div>";
+			$string .= "<div class=\"large-3 columns end\">";
+			$string .= "<button id=\"exercise-end\" class=\"button small right alert\">SUBMIT</button>";
+			$string .= "</div>";
+			$string .= "</div>";
+			$string .= "<div class=\"row\">";
+			$string .= "<div class=\"large-6 large-offset-3 columns\">";
+			$string .= "<div id=\"wami\"></div>";
+			$string .= "</div>";
+			$string .= "</div>";
+
 		}
 		return $string;
 	}

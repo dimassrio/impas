@@ -103,21 +103,31 @@ class MaterialsController extends \BaseController {
 		$material = Material::find($id);
 		$material->name = Input::get('name');
 		$material->description = Input::get('description');
+		$material->type = Input::get('type');
 		$cid = $material->course_id;
+		if($material->type == 'exercise'){
+			$file = Input::file('url');
+			$filename = date('dmy').str_random(12).'.'.$file->getClientOriginalExtension();
+			$destination = 'uploads/course/'.Input::get('course').'/exercise/';
+			$upload = $file->move($destination, $filename);
+			if($upload){
+				$material->url = $filename;
+			}
+		}
 		$material->course_id = Input::get('course');
-		$order = Material::where('course_id', Input::get('course'))->orderBy('order','asc')->get()->last()->order;
-		$material->order = $order++;
+		//$order = Material::where('course_id', Input::get('course'))->orderBy('order','asc')->get()->last()->order;
+		//$material->order = $order++;
 		$material->save();
 
 		/*REORDER LAST COURSE*/
-		$materials = Material::where('course_id', $cid)->orderBy('order', 'asc')->get();
+		/*$materials = Material::where('course_id', $cid)->orderBy('order', 'asc')->get();
 		$count = 1;
 		foreach ($materials as $m) {
 			$m->order = $count;
 			$m->save();
 			$count++;
 		}
-
+*/
 		return Redirect::to('materials');	
 	}
 
@@ -169,7 +179,7 @@ class MaterialsController extends \BaseController {
 	 			$pdfile = new Pdfile;
 	 			$pdfile->name = Input::get('pdf_name');
 	 			$material = Material::find($id);
-				$destination = 'uploads/course/'.$material->course_id.'/pdf/';
+				$destination = 'uploads/course/'.$material->course_id.'/'.$id.'/pdf/';
 				$filename = date('dmy').str_random(12).'.'.$file->getClientOriginalExtension();
 				$upload = $file->move($destination, $filename);
 				if($upload){
@@ -186,7 +196,7 @@ class MaterialsController extends \BaseController {
 	 			$audio = new Audio;
 	 			$audio->name = Input::get('audio_name');
 	 			$material = Material::find($id);
-				$destination = 'uploads/course/'.$material->course_id.'/audio/';
+				$destination = 'uploads/course/'.$material->course_id.'/'.$id.'/audio/';
 				$filename = date('dmy').str_random(12).'.'.$file->getClientOriginalExtension();
 				$upload = $file->move($destination, $filename);
 				if($upload){
@@ -225,13 +235,30 @@ class MaterialsController extends \BaseController {
  		 return Redirect::to('materials');
  	}
 
+ 	public function addImage($id){
+		$file = Input::file('images');
+		$material = Material::find($id);
+		$destination = 'uploads/course/'.$material->course_id.'/'.$id.'/images/';
+		$filename = date('dmy').str_random(12).'.'.$file->getClientOriginalExtension();
+		$upload = $file->move($destination, $filename);
+		if($upload){
+			$zip = new ZipArchive;
+			$res = $zip->open($destination.$filename);
+			if($res == TRUE){
+				$zip->extractTo($destination);
+				$zip->close();
+				unlink($destination.$filename);
+			}
+		}
+ 		return Redirect::to('materials');
+ 	}
  	public function addPdf($id){
  		$file = Input::file('pdf');
  		if($file->getMimeType() == "application/pdf"){
  			$pdfile = new Pdfile;
  			$pdfile->name = Input::get('name');
  			$material = Material::find($id);
-			$destination = 'uploads/course/'.$material->course_id.'/pdf/';
+			$destination = 'uploads/course/'.$material->course_id.'/'.$id.'/pdf/';
 			$filename = date('dmy').str_random(12).'.'.$file->getClientOriginalExtension();
 			$upload = $file->move($destination, $filename);
 			if($upload){
@@ -249,7 +276,7 @@ class MaterialsController extends \BaseController {
  			$audio = new Audio;
  			$audio->name = Input::get('name');
  			$material = Material::find($id);
-			$destination = 'uploads/course/'.$material->course_id.'/audio/';
+			$destination = 'uploads/course/'.$material->course_id.'/'.$id.'/audio/';
 			$filename = date('dmy').str_random(12).'.'.$file->getClientOriginalExtension();
 			$upload = $file->move($destination, $filename);
 			if($upload){
@@ -301,6 +328,21 @@ class MaterialsController extends \BaseController {
 
  		return View::make('materials.order',$this->data);
  	}
+
+ 	public function recordAudio($id="0", $idu="0"){
+ 		$name = $id.'-'.$idu.'-output.wav';
+ 		$content = file_get_contents('php://input');
+ 		$path = 'uploads/users/recording/';
+ 		$fh = fopen($path.$name, 'w') or die("can't open file");
+		fwrite($fh, $content);
+		fclose($fh);
+		$file = new Upload;
+		$file->material_id = $id;
+		$file->user_id = $idu;
+		$file->url = $path.$name;
+		$file->type = "audio";
+		$file->save();
+	}
 
  	public function showCourseMaterialAnswers($idc, $order){
  		$json = Session::pull('exercise');

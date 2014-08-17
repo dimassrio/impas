@@ -56,7 +56,6 @@
 					</div>
 					<div class="large-4 columns left">
 						<h5>Add PDF to this material.</h5>
-
 						<form action="{{url('materials').'/'.$material->id.'/add/pdf'}}" method="post" enctype="multipart/form-data">
 						<label for="name">Insert PDF name</label>
 						<input type="text" id="name" name="name">
@@ -66,7 +65,16 @@
 						</form>
 					</div>
 				</div>
-				
+				<div class="row section">
+					<div class="large-4 large-offset-2 columns">
+						<h5>Add Image assets to this material.</h5>
+						<form action="{{url('materials').'/'.$material->id.'/add/images'}}" method="post" enctype="multipart/form-data">
+						<label for="images">Image zip file to upload.</label>
+						<input type="file" name="images" id="images">
+						<input type="submit" class="button right small">
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

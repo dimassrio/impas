@@ -62,7 +62,9 @@ class UsersController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$this->data['user'] = User::find($id);
+		$this->data['files'] = Upload::where('user_id', $id)->get();
+		return View::make('users.show', $this->data);
 	}
 
 	/**

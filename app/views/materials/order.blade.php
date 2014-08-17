@@ -156,6 +156,14 @@
 </script>
 
 @if($material->type == 'exercise')
+	@if(Session::has('type'))
+		@if(Session::get('type') == 'imagerecord')
+			<script type="text/javascript"
+		src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+		<script type="text/javascript" src="{{asset('assets/vendor/wami-recorder/example/client/recorder.js')}}"></script>
+		<script type="text/javascript" src="{{asset('assets/vendor/wami-recorder/example/client/gui.js')}}"></script>
+		@endif
+	@endif
 	<script type="text/javascript">
 	$(function(){
 		$('#material-next-button').hide();
@@ -167,6 +175,46 @@
 		}*/
 	});
 	</script>
+	@if(Session::has('type'))
+		@if(Session::get('type') == 'imagerecord')
+			<script type="text/javascript"
+			src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+			<script type="text/javascript" src="{{asset('assets/vendor/wami-recorder/example/client/recorder.js')}}"></script>
+			<script type="text/javascript" src="{{asset('assets/vendor/wami-recorder/example/client/gui.js')}}"></script>
+			
+			<script type="text/javascript">
+				$(function(){
+					$('#exercise-start').click(setupRecorder);
+					$('#exercise-end').click(stopRecorder);
+					$('#exercise-end').hide();
+				});
+				function setupRecorder() {
+					Wami.setup({
+						id : "wami",
+						swfUrl : "{{asset('assets/vendor/wami-recorder/example/client/Wami.swf')}}",
+						onReady : startRecord}
+					);
+					
+					/*Wami.setup({
+						id : "wami",
+						swfUrl : "{{asset('assets/vendor/wami-recorder/example/client/Wami.swf')}}",
+						//onReady : setupGUI
+					});*/
+				}
+				function startRecord(){
+					console.log(Wami.getRecordingLevel());
+					Wami.startRecording("{{url('materials').'/'.$material->id.'/record/'.Auth::user()->id}}");
+					$('#exercise-start').hide();
+					$('#exercise-end').show();
+				}
+				function stopRecorder(){
+					Wami.stopRecording();
+					$('#exercise-start').show();
+					$('#exercise-end').hide();
+				}
+			</script>
+		@endif
+	@endif
 @else
 <script type="text/javascript">
 	$(function(){

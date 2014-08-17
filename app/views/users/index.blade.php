@@ -8,7 +8,7 @@
 					<div class="large-12 columns">
 						<h4>LIST OF USERS</h4>
 						<p>Or maybe you want to add another <a href="{{url('users/create')}}">user?</a></p>
-						<table>
+						<table width="100%">
 							<thead>
 								<tr>
 									<th class="string">NAME</th><th class="string">USERNAME</th><th class="string">EMAIL</th>
@@ -24,6 +24,7 @@
 										<td>{{$user->level}}</td>
 										<td>
 											<a href="{{url('users').'/'.$user->id.'/edit'}}" class="button tiny">EDIT</a>
+											<a href="{{url('users').'/'.$user->id}}" class="button tiny">SHOW</a>
 											{{link_to(url('users').'/'.$user->id, "Delete", $attributes = array('class'=>'button alert tiny'));}}
 										</td>
 									</tr>

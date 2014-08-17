@@ -5782,6 +5782,9 @@ body {
 .min-height {
   min-height: 700px; }
 
+#wami {
+  min-height: 200px; }
+
 #footer {
   background: #34352D;
   color: #FFFFFF; }
