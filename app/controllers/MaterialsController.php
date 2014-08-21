@@ -322,6 +322,11 @@ class MaterialsController extends \BaseController {
 
  	public function showCourseMaterial($idc, $order="1"){
  		$this->data['material'] = Material::where('course_id', $idc)->where('order', $order)->get()->first();
+ 		$this->data['questions_content'] = Question::where('category', 'content')->get();
+ 		$this->data['questions_accuracy'] = Question::where('category', 'Accuracy and Stability')->get();
+ 		$this->data['questions_format'] = Question::where('category', 'Format')->get();
+ 		$this->data['questions_ease'] = Question::where('category', 'Ease of Use')->get();
+ 		$this->data['questions_interview'] = Question::where('category', 'Interview')->get();
  		$this->data['prev_material'] = Material::where('course_id', $idc)->where('order', $order-1)->get()->first();
  		$this->data['next_material'] = Material::where('course_id', $idc)->where('order', $order+1)->get()->first();
  		$this->data['presentation'] = Presentation::find(1);

@@ -23,7 +23,7 @@ module.exports = function (grunt) {
 			// CSS settings
 			css: {
 				base: 'assets/css',			 				// Base path to your CSS folder
-				files: ['assets/css/sass.css'],							// CSS files in order you'd like them concatenated and minified
+				files: ['assets/vendor/foundation/dist/assets/css/foundation.css','assets/css/sass.css'],							// CSS files in order you'd like them concatenated and minified
 				concat: '<%= options.css.base %>/concat.css',	// Name of the concatenated CSS file
 				min: '<%= options.publish %>/style.min.css'		// Name of the minified CSS file
 			},

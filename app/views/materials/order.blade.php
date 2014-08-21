@@ -144,6 +144,123 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="row section" id="questionaire-section">
+		<div class="large-8 large-offset-2 columns">
+			<dl class="accordion" data-accordion>
+				<dd class="accordion-navigation">
+					<a href="#panel1">Feedback Questionaire</a>
+					<div id="panel1" class="content">
+					<form>
+					<dl class="tabs" data-tab>
+						<dd class="active"><a href="#panel2-1">Content</a></dd>
+						<dd><a href="#panel2-2">Accuracy and Stability</a></dd>
+						<dd><a href="#panel2-3">Format</a></dd>
+						<dd><a href="#panel2-4">Ease of Use</a></dd>
+						<dd><a href="#panel2-5">Interview</a></dd>
+					</dl>
+					<div class="tabs-content">
+					<div class="content active" id="panel2-1">
+						<h3>CONTENT</h3>
+						<ol>
+						@foreach($questions_content as $q)
+							<li> @if($q->criteria != null) <strong>{{$q->criteria}} - </strong>
+							@endif
+							{{$q->questions}}
+								<br/>
+								@if($q->boolean_answer == 'yes')
+									<input type="radio"> YES <br/>
+									<input type="radio"> NO <br/>
+									<input type="text" placeholder="Notes">
+								@else
+									<textarea></textarea>
+								@endif
+							</li>
+						@endforeach
+						</ol>
+					</div>
+					<div class="content" id="panel2-2">
+						<h3>Accuracy and Stability</h3>
+						<ol>
+						@foreach($questions_accuracy as $q)
+							<li> @if($q->criteria != null) <strong>{{$q->criteria}} - </strong>
+							@endif
+							{{$q->questions}}
+								<br/>
+								@if($q->boolean_answer == 'yes')
+									<input type="radio"> YES <br/>
+									<input type="radio"> NO <br/>
+									<input type="text" placeholder="Notes">
+								@else
+									<textarea></textarea>
+								@endif
+							</li>
+						@endforeach
+						</ol>
+					</div>
+					<div class="content" id="panel2-3">
+						<h3>Format</h3>
+						<ol>
+						@foreach($questions_format as $q)
+							<li> @if($q->criteria != null) <strong>{{$q->criteria}} - </strong>
+							@endif
+							{{$q->questions}}
+								<br/>
+								@if($q->boolean_answer == 'yes')
+									<input type="radio"> YES <br/>
+									<input type="radio"> NO <br/>
+									<input type="text" placeholder="Notes">
+								@else
+									<textarea></textarea>
+								@endif
+							</li>
+						@endforeach
+						</ol>
+					</div>
+					<div class="content" id="panel2-4">
+						<h3>Ease of Use</h3>
+						<ol>
+						@foreach($questions_ease as $q)
+							<li> @if($q->criteria != null) <strong>{{$q->criteria}} - </strong>
+							@endif
+							{{$q->questions}}
+								<br/>
+								@if($q->boolean_answer == 'yes')
+									<input type="radio"> YES <br/>
+									<input type="radio"> NO <br/>
+									<input type="text" placeholder="Notes">
+								@else
+									<textarea></textarea>
+								@endif
+							</li>
+						@endforeach
+						</ol>
+					</div>
+					<div class="content" id="panel2-5">
+						<h3>Interview</h3>
+						<ol>
+						@foreach($questions_interview as $q)
+							<li> @if($q->criteria != null) <strong>{{$q->criteria}} - </strong>
+							@endif
+							{{$q->questions}}
+								<br/>
+								@if($q->boolean_answer == 'yes')
+									<input type="radio"> YES <br/>
+									<input type="radio"> NO <br/>
+									<input type="text" placeholder="Notes">
+								@else
+									<textarea></textarea>
+								@endif
+							</li>
+						@endforeach
+						</ol>
+					</div>
+					</form>
+					</div>
+ 				</dd>
+    		</dl>
+    	</div>		
+	</div>
 @stop
 
 @section('js')

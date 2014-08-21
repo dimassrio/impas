@@ -14,6 +14,8 @@
 							<textarea id="description" name="description"></textarea>
 							<label for="image">IMAGE</label>
 							<input type="file" id="image" name="image">
+							<label for="background">Color</label>
+							<input type="text" id="background" name="background">
 							<input type="submit" class="button right small">
 						</form>
 					</div>
