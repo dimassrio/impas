@@ -328,6 +328,8 @@
 					Wami.stopRecording();
 					$('#exercise-start').show();
 					$('#exercise-end').hide();
+					$('#material-next-button').show();
+					$('#material-previous-button').show();
 				}
 			</script>
 		@endif

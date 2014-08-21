@@ -37,8 +37,7 @@ class Material extends \Eloquent {
 	public function convertExercise(){
 		$url = $this->url;
 		$content = file_get_contents(asset('uploads/course').'/'.$this->course->id.'/exercise/'.$url);
-		$json = json_decode($content
-
+		$json = json_decode($content);
 		//$data = shuffle($json->content);
 		if($json->content[0]->type == 'multiplechoice'){
 			$string = "<div id=\"exercise-section\" class=\"row section\" >";
