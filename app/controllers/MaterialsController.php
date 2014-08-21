@@ -364,7 +364,7 @@ class MaterialsController extends \BaseController {
  		}else if($json->content[0]->type == "dragdrop"){
  			$count = sizeof($json->content);
  			for($i=0; $i<$count; $i++){
- 				$answer = $json->correct[$i];
+ 				$answer = $json->correct[$i]g;
  				$ans = Input::get('question_'.$i);
  				foreach ($ans as $k => $a) {
  					if($a == $answer[$k]){
