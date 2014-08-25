@@ -15,6 +15,7 @@ class AddAnswers extends Migration {
 		Schema::table('answers', function(Blueprint $table)
 		{
 			$table->integer('user_id');
+			$table->integer('material_id');
 		});
 	}
 
@@ -29,6 +30,7 @@ class AddAnswers extends Migration {
 		Schema::table('answers', function(Blueprint $table)
 		{
 			$table->dropColumn('user_id');
+			$table->integer('material_id');
 		});
 	}
 

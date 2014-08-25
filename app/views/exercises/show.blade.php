@@ -1,1 +1,0 @@
-E:\Development\php\impas\app/views/exercises/show.blade.php

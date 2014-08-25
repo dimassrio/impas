@@ -2,13 +2,11 @@
 	<div class="large-4 large-offset-3 columns">
 		<h4>{{$json->subtitle}}</h4>
 		<ul class="exercise-orbit" data-orbit   data-options="animation:fade;animation_speed:500;slide_number:false; bullets:false;circular:false;" style="width:400;">
-			<?php
-			foreach ($json->content as $k => $c) {
-			?>
-			<li id="image_".$k."" style="text-align:center;">
-			<img src="{{$path.'/'.$c->image.}}" alt="{{$c->image}}" />
-			</li>
-			<?php } ?>
+			@foreach($json->content as $k => $c)
+				<li id="image_".$k."" style="text-align:center;">
+					<img src="{{$path.'/'.$c->image.}}" alt="{{$c->image}}" />
+				</li>
+			@endforeach
 		</ul>
 	</div>
 	</div>

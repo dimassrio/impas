@@ -20,7 +20,7 @@ Route::get('courses/{id}/enroll', 'CoursesController@enroll');
 Route::resource('users', 'UsersController');
 Route::post('courses/{id}/edit', 'CoursesController@update');
 Route::resource('courses', 'CoursesController');
-
+Route::post('feedback/{id}', 'MaterialsController@showCourseMaterialFeedback');
 Route::resource('materials', 'MaterialsController');
 Route::get('references', 'SystemController@references');
 Route::get('about', 'SystemController@about');

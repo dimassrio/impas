@@ -4,7 +4,7 @@
 			<dd class="accordion-navigation">
 				<a href="#panel_feedback"><i class="fi-checkbox"></i> FEEDBACK QUESTIONAIRE</a>
 				<div id="panel_feedback" class="content">
-					<form action="" method="post">
+					<form action="{{url('feedback').'/'.$material->id}}" method="post">
 						<dl class="tabs" data-tab>
 							@foreach($questionaire as $k => $f)
 								@if($k == 0)
@@ -27,11 +27,11 @@
 											<li>
 												<label for="text_{{$c->question_categories_id}}_{{$c->id}}"><strong>{{$c->criteria}}</strong> {{$c->questions}}</label>
 												@if($c->boolean_answer == 'yes')
-													<input type="radio" name="radio_question_{{$c->question_categories_id}}_{{$c->id}}" id="question_{{$c->question_categories_id}}_{{$c->id}}_yes"> <label for="question_{{$c->question_categories_id}}_{{$c->id}}_yes">YES</label> <br/>
-													<input type="radio" name="radio_question_{{$c->question_categories_id}}_{{$c->id}}" id="question_{{$c->question_categories_id}}_{{$c->id}}_no"><label for="question_{{$c->question_categories_id}}_{{$c->id}}_no">NO</label> 
+													<input type="radio" name="radio_question_{{$c->question_categories_id}}_{{$c->id}}" id="question_{{$c->question_categories_id}}_{{$c->id}}_yes" value="yes"> <label for="question_{{$c->question_categories_id}}_{{$c->id}}_yes">YES</label> <br/>
+													<input type="radio" name="radio_question_{{$c->question_categories_id}}_{{$c->id}}" id="question_{{$c->question_categories_id}}_{{$c->id}}_no" value="no"><label for="question_{{$c->question_categories_id}}_{{$c->id}}_no">NO</label> 
 													<input type="text" placeholder="Notes" name="text_{{$c->question_categories_id}}_{{$c->id}}" id="text_{{$c->question_categories_id}}_{{$c->id}}">
 												@else
-													<textarea name="text_{{$c->question_categories_id}}_{{$c->id}}" id="text_{{$c->question_categories_id}}_{{$c->id}}" cols="30" rows="10"></textarea>
+													<textarea name="text_question_{{$c->question_categories_id}}_{{$c->id}}" id="text_{{$c->question_categories_id}}_{{$c->id}}" cols="30" rows="10"></textarea>
 												@endif
 											</li>
 										@endforeach

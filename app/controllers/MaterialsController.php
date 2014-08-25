@@ -321,6 +321,7 @@ class MaterialsController extends \BaseController {
  	}
 
  	public function showCourseMaterial($idc, $order="1"){
+
  		/*MATERIAL INITIALIZATION*/
 		$this->data['material'] = Material::where('course_id', $idc)->where('order', $order)->get()->first();
 		/*NAVIGATION*/
@@ -332,6 +333,7 @@ class MaterialsController extends \BaseController {
 
 			/*FEEDBACK*/
 	 		$data['questionaire'] = array();
+	 		$data['material'] = $this->data['material'];
 	 		$category = QuestionCategory::all();
 	 		foreach ($category as $c) {
 	 			array_push($data['questionaire'], Question::where('question_categories_id', $c->id)->get());
@@ -352,21 +354,30 @@ class MaterialsController extends \BaseController {
  			}else if($json->content[0]->type == 'imagerecords'){
  				$data['path'] = asset("uploads/course/".$this->course_id."/".$this->id."/images/");
  				return View::make('materials.order', $this->data)->nest('exercises', 'exercises.imagerecords', $data);
+ 			}else if($json->content[0]->type == 'imagerecords'){
+ 				return View::make('materials.order', $this->data)->nest('exercises', 'exercises.goodbad', $data);
  			}
  		}
 
  	}
 
- 	public function showCourseMaterialFeedback(){
+ 	public function showCourseMaterialFeedback($id){
  		$category = QuestionCategory::all();
+ 		Eloquent::unguard();
 	 		foreach ($category as $c) {
 	 			$question = Question::where('question_categories_id', $c->id)->get();
 	 			foreach ($question as $q) {
-	 				if($question->boolean_answer){
-	 					Answer::create(array('user_id'=>Auth::user()->id, 'boolean_answer'=>Input::get('radio_question_'.$c->question_categories_id.'_'.$c->id), 'answer_text'=>Input::get('text_'.$c->question_categories_id.'_'.$c->id));
-	 				}else{
-	 					Answer::create(array(array('user_id'=>Auth::user()->id, 'answer_text'=>Input::get('text_'.$c->question_categories_id.'_'.$c->id)));
+	 				if($q->boolean_answer == 'yes'){
+	 					if(Input::has('radio_question_'.$q->question_categories_id.'_'.$q->id)){
+	 						Answer::create(array('user_id'=>Auth::user()->id, 'boolean_answer'=>Input::get('radio_question_'.$q->question_categories_id.'_'.$q->id), 'answer_text'=>Input::get('text_'.$q->question_categories_id.'_'.$q->id), 'question_id'=>$q->id, 'material_id'=>$id));
+	 					}
+	 				}else if($q->boolean_answer == 'no'){
+	 					if(Input::has('text_question_'.$q->question_categories_id.'_'.$q->id)){
+	 						Answer::create(array('user_id'=>Auth::user()->id, 'answer_text'=>Input::get('text_question_'.$q->question_categories_id.'_'.$q->id), 'question_id'=>$q->id, 'material_id'=>$id));
+	 					}
 	 				}
+	 				
+	 				
 	 			}
 	 		}
  		return Redirect::back();
@@ -376,7 +387,7 @@ class MaterialsController extends \BaseController {
  		$name = $id.'-'.$idu.'-output.wav';
  		$content = file_get_contents('php://input');
  		$path = 'uploads/users/recording/';
- 		$fh = fopen($path.$name, 'w') or die("can't open file");
+ 		$fh = fopen($path.$name, 'w') or +("can't open file");
 		fwrite($fh, $content);
 		fclose($fh);
 		$file = new Upload;
@@ -414,10 +425,18 @@ class MaterialsController extends \BaseController {
  							$result++;
  						}
  					}
- 					
  				}
  			}
- 			
+ 		}else if($json->content[0]->type == "goodbad"){
+ 			$count = sizeof($json->content);
+ 			for($i=0; $i<$count; $i++){
+ 				$answer = $json->content[$i]->correct;
+ 				$ans = Input::get('question_'.$i);
+ 				if($ans == $answer){
+ 					$result++;
+ 				}
+ 			}
+
  		}
 
  		$history = new History;
