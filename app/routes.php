@@ -40,3 +40,4 @@ Route::get('courses/{id}/enroll', 'CoursesController@enroll');
 Route::post('courses/{idc}/materials/{order}/answers', 'MaterialsController@showCourseMaterialAnswers');
 Route::post('courses/{idc}/order', 'CoursesController@orderMaterial');
 Route::get('reports', 'SystemController@report');
+Route::post('reports', 'SystemController@report');

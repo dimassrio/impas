@@ -124,6 +124,7 @@ class UsersController extends \BaseController {
 		if(Auth::check()){
 			Auth::logout();
 		}
+	//	SystemController::sendNoCacheHeaders();
 		return Redirect::intended('/');
 	}
 

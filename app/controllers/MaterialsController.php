@@ -321,17 +321,55 @@ class MaterialsController extends \BaseController {
  	}
 
  	public function showCourseMaterial($idc, $order="1"){
- 		$this->data['material'] = Material::where('course_id', $idc)->where('order', $order)->get()->first();
- 		$this->data['questions_content'] = Question::where('category', 'content')->get();
- 		$this->data['questions_accuracy'] = Question::where('category', 'Accuracy and Stability')->get();
- 		$this->data['questions_format'] = Question::where('category', 'Format')->get();
- 		$this->data['questions_ease'] = Question::where('category', 'Ease of Use')->get();
- 		$this->data['questions_interview'] = Question::where('category', 'Interview')->get();
- 		$this->data['prev_material'] = Material::where('course_id', $idc)->where('order', $order-1)->get()->first();
+ 		/*MATERIAL INITIALIZATION*/
+		$this->data['material'] = Material::where('course_id', $idc)->where('order', $order)->get()->first();
+		/*NAVIGATION*/
+		$this->data['prev_material'] = Material::where('course_id', $idc)->where('order', $order-1)->get()->first();
  		$this->data['next_material'] = Material::where('course_id', $idc)->where('order', $order+1)->get()->first();
- 		$this->data['presentation'] = Presentation::find(1);
 
- 		return View::make('materials.order',$this->data);
+ 		if($this->data['material']->type == 'content'){
+ 			/*CONTENT*/
+
+			/*FEEDBACK*/
+	 		$data['questionaire'] = array();
+	 		$category = QuestionCategory::all();
+	 		foreach ($category as $c) {
+	 			array_push($data['questionaire'], Question::where('question_categories_id', $c->id)->get());
+	 		}
+	 		return View::make('materials.order', $this->data)->nest('content', 'materials.order-content', $this->data)->nest('feedback', 'materials.order-feedback', $data);
+
+ 		}else if($this->data['material']->type == 'exercise' && $this->data['material']->url != NULL){
+ 			$url = $this->data['material']->url;
+			$content = file_get_contents(asset('uploads/course').'/'.$this->data['material']->course->id.'/exercise/'.$url);
+			$json = json_decode($content);
+			$data['json'] = $json;
+			$data['material'] = $this->data['material'];
+			Session::flash('exercise', $json);
+			if($json->content[0]->type == 'multiplechoice'){
+ 				return View::make('materials.order', $this->data)->nest('exercises', 'exercises.multiplechoice', $data);
+ 			}else if($json->content[0]->type =='dragdrop'){
+ 				return View::make('materials.order', $this->data)->nest('exercises', 'exercises.dragdrop', $data);
+ 			}else if($json->content[0]->type == 'imagerecords'){
+ 				$data['path'] = asset("uploads/course/".$this->course_id."/".$this->id."/images/");
+ 				return View::make('materials.order', $this->data)->nest('exercises', 'exercises.imagerecords', $data);
+ 			}
+ 		}
+
+ 	}
+
+ 	public function showCourseMaterialFeedback(){
+ 		$category = QuestionCategory::all();
+	 		foreach ($category as $c) {
+	 			$question = Question::where('question_categories_id', $c->id)->get();
+	 			foreach ($question as $q) {
+	 				if($question->boolean_answer){
+	 					Answer::create(array('user_id'=>Auth::user()->id, 'boolean_answer'=>Input::get('radio_question_'.$c->question_categories_id.'_'.$c->id), 'answer_text'=>Input::get('text_'.$c->question_categories_id.'_'.$c->id));
+	 				}else{
+	 					Answer::create(array(array('user_id'=>Auth::user()->id, 'answer_text'=>Input::get('text_'.$c->question_categories_id.'_'.$c->id)));
+	 				}
+	 			}
+	 		}
+ 		return Redirect::back();
  	}
 
  	public function recordAudio($id="0", $idu="0"){
@@ -367,9 +405,16 @@ class MaterialsController extends \BaseController {
  				$answer = $json->correct[$i];
  				$ans = Input::get('question_'.$i);
  				foreach ($ans as $k => $a) {
- 					if($a == $answer[$k]){
- 						$result++;
+ 					if(is_array($answer[$k])){
+ 						if(in_array($a, $answer[$k])){
+ 							 $result++;
+ 						}
+ 					}else{
+ 						if($a == $answer[$k]){
+ 							$result++;
+ 						}
  					}
+ 					
  				}
  			}
  			

@@ -95,8 +95,17 @@ class SystemController extends \BaseController {
 	}
 
 	public function report(){
-
+		//if(Input::get('course')!=NULL){
+			//$this->data['histories'] = History::where('user_id', Auth::user()->id)->where('course_id', Input::get('course'))->orderBy('material_id')->get();
+		//}else{
 		$this->data['histories'] = History::where('user_id', Auth::user()->id)->orderBy('material_id')->get();
+	//	}
+		$course  = Course::all();
+		$this->data['option'] = array();
+		foreach ($course as $c) {
+			$string = "<option value=\"".$c->id."\">".$c->name."</option>";
+			array_push($this->data['option'], $string);
+		}
 		return View::make('reports', $this->data);
 	}
 }
