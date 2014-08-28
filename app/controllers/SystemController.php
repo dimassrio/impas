@@ -98,6 +98,7 @@ class SystemController extends \BaseController {
 		//if(Input::get('course')!=NULL){
 			//$this->data['histories'] = History::where('user_id', Auth::user()->id)->where('course_id', Input::get('course'))->orderBy('material_id')->get();
 		//}else{
+		$this->data['files'] = Upload::where('user_id', Auth::user()->id)->get();
 		$this->data['histories'] = History::where('user_id', Auth::user()->id)->orderBy('material_id')->get();
 	//	}
 		$course  = Course::all();

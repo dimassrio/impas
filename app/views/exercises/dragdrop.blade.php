@@ -1,41 +1,31 @@
 <div id="exercise-section" class="row section" >
-<form action="{{url('courses').'/'.$this->course->id.'/materials/'.$this->order.'/answers}}" method="POST">
+<form action="{{url('courses').'/'.$material->course->id.'/materials/'.$material->order.'/answers'}}" method="POST">
 <div class="large-8 large-offset-2 columns" >
 <ol class="question" >
-	<?php 
-	foreach ($json->content as $key => $c) {
-	$num = $key+1; 
-	?>
+<?php $num = 1; ?>
+	@foreach($json->content as $key => $c)
 	<div class="row">
 		<div class="large-8 columns">
 			<li><p>{{$c->question}}</p>
 		</div>
 		<div class="large-4 columns">
-			<?php 
-			foreach ($c->answer as $k => $a){
-			?>
+			@for($i = 0; $i<$c->ans; $i++)
 			<div class="row">
 				<div class="large-3 columns">
-				({{$k}})
+				({{$num++}})
 				</div>
 				<div class="large-9 columns">
 					<select name="question_{{$key}}[]">
-						<?php 
-						foreach($c->answer as $o => $option){
-						?>
-							<option value="".$o."">".$option->text."</option>
-						<?php
-						}
-						?>
+						@foreach($c->answer as $o => $option)
+							<option value="{{$option->value}}">{{$option->text}}</option>
+						@endforeach
 					</select>
 				</div>
 			</div>
-			<?php
-			}
-			?>
+			@endfor
 		</div>
 	</div>
-	<?php	} ?>
+	@endforeach
 </ol>
 <input type="submit" class="button right small" id="exercise-submit-button">
 </div>

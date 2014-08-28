@@ -32,6 +32,15 @@
 			</li>
 			@if(Auth::check())
 				<li><a href="{{url('reports')}}">REPORT</a></li>
+				@if(Auth::user()->isAdmin())
+				<li class="has-dropdown"><a href="#">ADMIN</a>
+					<ul class="dropdown">
+						<li><a href="{{url('courses')}}">COURSE</a></li>
+						<li><a href="{{url('materials')}}">MATERIAL</a></li>
+						<li><a href="{{url('users')}}">USERS</a></li>
+					</ul>
+				</li>
+				@endif
 			@endif
 		</ul>
 	</section>

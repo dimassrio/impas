@@ -7,10 +7,11 @@
 				<div class="row section">
 					<div class="large-12 columns">
 						<h4>LIST OF USERS</h4>
-						<p>Or maybe you want to add another <a href="{{url('users/create')}}">user?</a></p>
+						<p>Or maybe you want to add another <a href="{{url('users/create')}}" class="button tiny"><i class="fi-plus"></i> USER</a> ?</p>
 						<table width="100%">
 							<thead>
 								<tr>
+									<th class="integer">NO</th>
 									<th class="string">NAME</th><th class="string">USERNAME</th><th class="string">EMAIL</th>
 									<th>LEVEL</th><th class="none">ACTION</th>
 								</tr>
@@ -18,6 +19,7 @@
 							<tbody>
 								@foreach ($users as $user) 
 									<tr>
+										<td>{{$no++}}</td>
 										<td>{{$user->name}}</td>
 										<td>{{$user->username}}</td>
 										<td>{{$user->email}}</td>
