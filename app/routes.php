@@ -13,7 +13,7 @@
 
 Route::get('/', 'SystemController@index')->before('dashboard');
 Route::post('login', 'UsersController@login')->before('guest');
-
+Route::get('register', 'UsersController@create')->before('guest');
 Route::get('logout', 'UsersController@logout');
 Route::get('dashboard', 'SystemController@dashboard')->before('auth');
 Route::get('courses/{id}/enroll', 'CoursesController@enroll');

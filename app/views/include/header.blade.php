@@ -20,7 +20,7 @@
 			@if(Auth::check())
 				<li><a href="{{url('logout')}}" class="alert button">Logout</a></li>
 			@else
-			<li><a href="{{url('users/create')}}" class="button">SIGN UP</a></li>
+			<li><a href="{{url('register')}}" class="button">SIGN UP</a></li>
 			@endif
 		</ul>
 
