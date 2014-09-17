@@ -34,6 +34,17 @@
 								<div class="large-9 columns"><input type="text" id="email" name="email" required data-parsley-trigger="change" data-parsley-type="email"></div>
 							</div>
 							<div class="row">
+								<div class="large-3 columns"><label for="code" class="right inline">Identification Number :</label></div>
+								<div class="large-9 columns"><input type="text" name="code" id="code"></div>
+							</div>
+							<div class="row">
+								<div class="large-3 columns"><label for="classroom" class="right inline">Classroom :</label></div>
+								<div class="large-9 columns"><select name="classroom" id="classroom"><option value="0">NO CLASSROOM</option></select></div>
+							</div>
+							<div class="row">
+								<div class="large-3 columns"></div>
+							</div>
+							<div class="row">
 								<div class="large-12 columns">
 									<input type="submit" class="button right small" required>
 								</div>

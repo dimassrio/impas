@@ -48,6 +48,8 @@ class UsersController extends \BaseController {
 		$users->password = Hash::make(Input::get('password'));
 		$users->email = Input::get('email');
 		$users->level = 2;
+		$users->code = Input::get('code');
+		$users->classroom_id = Input::get('classroom');
 		$users->save();
 
 		return Redirect::to('/');
