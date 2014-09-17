@@ -5,8 +5,12 @@ use Faker\Factory as Faker;
 
 class QuestionCategoryTableSeeder extends Seeder {
 
-	public function run()
-	
+	public function run(){
+		QuestionCategory::create(array("name"=>"Content"));
+		QuestionCategory::create(array("name"=>"Accuracy and Suitability"));
+		QuestionCategory::create(array("name"=>"Format"));
+		QuestionCategory::create(array("name"=>"Ease of Use"));
+		QuestionCategory::create(array("name"=>"Interview Question"));
 	}
 
 }
