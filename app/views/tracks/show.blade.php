@@ -1,0 +1,1 @@
+E:\Development\php\impas\app/views/tracks/show.blade.php

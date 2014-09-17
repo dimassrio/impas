@@ -327,7 +327,10 @@ class MaterialsController extends \BaseController {
 		/*NAVIGATION*/
 		$this->data['prev_material'] = Material::where('course_id', $idc)->where('order', $order-1)->get()->first();
 		$this->data['next_material'] = Material::where('course_id', $idc)->where('order', $order+1)->get()->first();
-
+		$track = new Track();
+		$track->user_id = Auth::user()->id;
+		$track->material_id = $this->data['material']->id;
+		$track->save();
 		if($this->data['material']->type == 'content'){
 			/*CONTENT*/
 
